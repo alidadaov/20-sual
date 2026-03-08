@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Sual</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EFE6; --paper:#FDFAF5; --ink:#18120A; --ink2:#4A3F35; --ink3:#9C8C7E;
+  --accent:#D4451E; --gold:#C9950A; --border:#DDD4C5; --shad:rgba(0,0,0,.07);
+  --yb:#EDF7EE; --yc:#2E8B35; --nb:#FDECEA; --nc:#C93025; --mb:#FFF8E6; --mc:#C4840A;
+}
+[data-theme=dark]{
+  --bg:#0E0C09; --paper:#161410; --ink:#F0EBE2; --ink2:#C0B8AE; --ink3:#6B6058;
+  --accent:#E05830; --gold:#E0A820; --border:#2E2820; --shad:rgba(0,0,0,.5);
+  --yb:#0A1E0B; --yc:#3AAF42; --nb:#1E0C0A; --nc:#E04035; --mb:#1C1500; --mc:#E09820;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;
+  min-height:100vh;display:flex;align-items:flex-start;justify-content:center;
+  padding:24px 16px 60px;transition:background .3s,color .3s;position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 31px,var(--border) 32px),
+    repeating-linear-gradient(90deg,transparent,transparent 31px,var(--border) 32px);
+  opacity:.25;
+}
+.wrap{position:relative;z-index:1;width:100%;max-width:580px;}
+
+/* TOP BAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.logo{display:flex;align-items:baseline;gap:8px;}
+.logo-n{font-family:'Syne',sans-serif;font-size:62px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-3px;}
+.logo-w{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:2px;}
+.tbr{display:flex;align-items:center;gap:8px;}
+.cbtn{
+  height:36px;padding:0 12px;min-width:36px;border-radius:8px;
+  border:1.5px solid var(--border);background:var(--paper);color:var(--ink2);
+  cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;letter-spacing:1px;
+  transition:border-color .2s,color .2s;
+}
+.cbtn:hover{border-color:var(--ink);color:var(--ink);}
+.lang-wrap{position:relative;}
+.lang-dd{
+  display:none;position:absolute;right:0;top:42px;min-width:72px;
+  background:var(--paper);border:1.5px solid var(--border);border-radius:8px;
+  overflow:hidden;box-shadow:0 8px 24px var(--shad);z-index:100;
+}
+.lang-dd.open{display:block;}
+.lopt{
+  padding:10px 16px;font-family:'Syne',sans-serif;font-size:11px;
+  font-weight:800;letter-spacing:1.5px;cursor:pointer;color:var(--ink3);
+  transition:background .15s;
+}
+.lopt:hover{background:var(--bg);color:var(--ink);}
+.lopt.sel{color:var(--accent);}
+
+/* CARD */
+.card{
+  background:var(--paper);border:1.5px solid var(--border);
+  border-radius:4px;box-shadow:5px 5px 0 var(--border);
+  padding:32px 32px 32px 52px;position:relative;
+  transition:background .3s,border-color .3s;
+}
+.card::before{content:'';position:absolute;left:34px;top:0;bottom:0;width:1.5px;background:rgba(212,69,30,.2);}
+
+/* SCREENS */
+.sc{display:none;}
+.sc.active{display:block;animation:fu .35s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* NICKNAME */
+.big-t{font-family:'Syne',sans-serif;font-size:clamp(22px,5vw,30px);font-weight:900;line-height:1.25;margin-bottom:10px;}
+.desc{font-size:14px;color:var(--ink3);line-height:1.75;margin-bottom:22px;}
+.fi{
+  display:block;width:100%;background:var(--bg);border:1.5px solid var(--border);
+  border-radius:4px;padding:13px 16px;font-family:'Syne',sans-serif;font-size:15px;
+  font-weight:700;color:var(--ink);outline:none;margin-bottom:16px;transition:border-color .2s;
+}
+.fi:focus{border-color:var(--accent);}
+.fi::placeholder{color:var(--ink3);font-weight:400;}
+.how{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;}
+.how-r{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink2);}
+.how-n{
+  width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--paper);
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.rbtn{display:flex;gap:10px;}
+.btn-p{
+  flex:1;background:var(--ink);color:var(--paper);border:none;border-radius:4px;
+  padding:14px 20px;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+  letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all .2s;
+}
+.btn-p:hover{background:var(--accent);transform:translateY(-2px);}
+.btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;background:var(--ink);}
+.btn-o{
+  flex:0;white-space:nowrap;background:transparent;border:1.5px solid var(--border);
+  border-radius:4px;padding:14px 16px;font-family:'Syne',sans-serif;font-size:13px;
+  font-weight:700;color:var(--ink2);cursor:pointer;transition:all .2s;
+}
+.btn-o:hover{border-color:var(--gold);color:var(--gold);}
+
+/* GAME */
+.gh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.qb{font-family:'Syne',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);}
+.qb strong{color:var(--accent);font-size:20px;letter-spacing:0;}
+.cpill{
+  display:flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:800;color:var(--gold);
+  background:var(--bg);border:1.5px solid var(--border);border-radius:100px;padding:5px 14px;
+}
+.dtr{display:flex;gap:5px;margin-bottom:20px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--border);background:transparent;transition:background .3s,border-color .3s;}
+.dot.y{background:var(--yc);border-color:var(--yc);}
+.dot.n{background:var(--nc);border-color:var(--nc);}
+.dot.m{background:var(--mc);border-color:var(--mc);}
+
+/* Question box */
+.qbox{margin-bottom:22px;min-height:90px;}
+.ql{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;}
+.qt{font-family:'Syne',sans-serif;font-size:clamp(18px,4.5vw,25px);font-weight:800;color:var(--ink);line-height:1.35;}
+.ldc{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink3);}
+.sp{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--ink3);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.rc{margin-top:9px;font-size:12px;color:var(--ink3);font-style:italic;line-height:1.6;padding:6px 10px;background:var(--bg);border-left:3px solid var(--border);border-radius:0 4px 4px 0;}
+.cfr{margin-top:10px;}
+.cfb{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.cff{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;transition:width .7s;}
+.cfl{font-size:11px;color:var(--ink3);margin-top:4px;}
+
+/* Answer buttons */
+.ag{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;}
+.ab{
+  padding:13px 6px;border:1.5px solid;border-radius:4px;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  cursor:pointer;letter-spacing:.5px;transition:transform .12s,box-shadow .12s;
+}
+.ab:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 6px 16px var(--shad);}
+.ab:disabled{opacity:.35;cursor:not-allowed;}
+.ay{background:var(--yb);border-color:var(--yc);color:var(--yc);}
+.an{background:var(--nb);border-color:var(--nc);color:var(--nc);}
+.am{background:var(--mb);border-color:var(--mc);color:var(--mc);}
+
+/* History */
+.hist{max-height:140px;overflow-y:auto;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:5px;}
+.hr2{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink3);line-height:1.5;}
+.ht{width:20px;height:20px;border-radius:3px;flex-shrink:0;font-family:'Syne',sans-serif;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.hty{background:var(--yb);color:var(--yc);border:1px solid var(--yc);}
+.htn{background:var(--nb);color:var(--nc);border:1px solid var(--nc);}
+.htm{background:var(--mb);color:var(--mc);border:1px solid var(--mc);}
+
+/* Result */
+.ri{font-size:52px;margin-bottom:12px;}
+.rt{font-family:'Syne',sans-serif;font-size:clamp(24px,6vw,36px);font-weight:900;margin-bottom:8px;}
+.rg{font-family:'Syne',sans-serif;font-size:clamp(19px,4vw,26px);font-weight:700;color:var(--accent);margin-bottom:8px;}
+.rs{font-size:14px;color:var(--ink3);margin-bottom:26px;line-height:1.7;}
+.rbs{display:flex;gap:10px;}
+.btn-s{
+  flex:1;background:transparent;border:1.5px solid var(--border);border-radius:4px;
+  padding:12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+  color:var(--ink2);cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;
+}
+.btn-s:hover{border-color:var(--ink);color:var(--ink);}
+
+/* Final / Coin award */
+.ca{
+  display:inline-flex;align-items:center;gap:10px;background:var(--mb);border:2px solid var(--gold);
+  border-radius:8px;padding:13px 22px;font-family:'Syne',sans-serif;font-size:20px;
+  font-weight:900;color:var(--gold);margin:16px 0 20px;
+  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* Leaderboard */
+.lbh{font-family:'Syne',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px;}
+.lbs{font-size:13px;color:var(--ink3);margin-bottom:22px;}
+.lbt{width:100%;border-collapse:collapse;}
+.lbt th{font-family:'Syne',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);padding:8px 4px;text-align:left;border-bottom:1.5px solid var(--border);}
+.lbt td{padding:11px 4px;font-size:14px;color:var(--ink2);border-bottom:1px solid var(--border);}
+.lbt tr:last-child td{border-bottom:none;}
+.lbr{font-family:'Syne',sans-serif;font-weight:900;font-size:15px;color:var(--ink3);width:30px;}
+.r1{color:#C9950A;}.r2{color:#9CA3AF;}.r3{color:#D4451E;}
+.lbn{font-family:'Syne',sans-serif;font-weight:800;color:var(--ink);}
+.lbc{font-family:'Syne',sans-serif;font-weight:800;color:var(--gold);text-align:right;}
+.lbme{background:rgba(201,149,10,.08);}
+.lbem{text-align:center;padding:32px;color:var(--ink3);font-size:14px;}
+
+@media(max-width:420px){
+  .ag{grid-template-columns:1fr 1fr;}
+  #btnM{grid-column:span 2;}
+  .card{padding:24px 24px 24px 40px;}
+  .card::before{left:26px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">
+      <span class="logo-n">20</span>
+      <span class="logo-w" id="eLogoW"></span>
+    </div>
+    <div class="tbr">
+      <button class="cbtn" id="eTheme" onclick="toggleTheme()">🌙</button>
+      <div class="lang-wrap">
+        <button class="cbtn" id="eLangBtn" onclick="toggleDD()"></button>
+        <div class="lang-dd" id="eLangDD">
+          <div class="lopt sel" onclick="setLang('az')">AZ</div>
+          <div class="lopt"     onclick="setLang('tr')">TR</div>
+          <div class="lopt"     onclick="setLang('en')">EN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- SCREEN 1: NICKNAME -->
+    <div class="sc active" id="scNick">
+      <div class="big-t" id="eNkTitle"></div>
+      <p class="desc"    id="eNkDesc"></p>
+      <input class="fi"  id="eNickInp" type="text" maxlength="20" autocomplete="off"/>
+      <div class="how">
+        <div class="how-r"><div class="how-n">1</div><span id="eH1"></span></div>
+        <div class="how-r"><div class="how-n">2</div><span id="eH2"></span></div>
+        <div class="how-r"><div class="how-n">3</div><span id="eH3"></span></div>
+        <div class="how-r"><div class="how-n">4</div><span id="eH4"></span></div>
+      </div>
+      <div class="rbtn">
+        <button class="btn-o" onclick="openLB()">🏆 <span id="eLbNav"></span></button>
+        <button class="btn-p" id="eStartBtn" onclick="startGame()" disabled><span id="eStartLbl"></span></button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: GAME -->
+    <div class="sc" id="scGame">
+      <div class="gh">
+        <div class="qb" id="eQBadge"></div>
+        <div class="cpill">🪙 <span id="eCoinDisp">0</span></div>
+      </div>
+      <div class="dtr" id="eDotsRow"></div>
+      <div class="qbox" id="eQBox"></div>
+      <div class="ag">
+        <button class="ab ay" id="btnY" onclick="doAns('yes')" disabled></button>
+        <button class="ab an" id="btnN" onclick="doAns('no')"  disabled></button>
+        <button class="ab am" id="btnM" onclick="doAns('idk')" disabled></button>
+      </div>
+      <div class="hist" id="eHist"></div>
+    </div>
+
+    <!-- SCREEN 3: RESULT -->
+    <div class="sc" id="scResult">
+      <div class="ri" id="eRIcon">🧠</div>
+      <div class="rt" id="eRTitle"></div>
+      <div class="rg" id="eRGuess">...</div>
+      <div class="rs" id="eRSub"></div>
+      <div class="rbs">
+        <button class="btn-s" id="eRBtnY" onclick="doConfirm(true)"></button>
+        <button class="btn-s" id="eRBtnN" onclick="doConfirm(false)"></button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: FINAL -->
+    <div class="sc" id="scFinal">
+      <div class="ri" id="eFIcon">🎉</div>
+      <div class="rt" id="eFTitle"></div>
+      <div id="eCoinBox"></div>
+      <div class="rs" id="eFSub"></div>
+      <button class="btn-p" id="ePlayAgain" onclick="playAgain()" style="margin-bottom:10px;"></button>
+      <button class="btn-s" id="eMenuBtn"   onclick="goMenu()"></button>
+    </div>
+
+    <!-- SCREEN 5: LEADERBOARD -->
+    <div class="sc" id="scLB">
+      <div class="lbh">🏆 <span id="eLbTitle"></span></div>
+      <div class="lbs" id="eLbSub"></div>
+      <div id="eLbContent"></div>
+      <div style="margin-top:20px;">
+        <button class="btn-s" id="eLbBack" onclick="showSc('scNick')"></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════ */
+const LANGS = {
+  az:{
+    logoW:'SUAL', qL:'SUAL',
+    nkT:'Sən fikirləş,\nmən tapım!',
+    nkD:'Oyunçu adını daxil et. Mən tapammayanda 🪙 coin qazanırsan.',
+    ph:'Oyunçu adın...', startBtn:'OYUNA BAŞLA',
+    h1:'İstənilən əşya, canlı və ya yer düşün',
+    h2:'Xüsusiyyət suallarına bəli / xeyr cavab ver',
+    h3:'20 sual sonunda mən təxminimi açıqlayıram',
+    h4:'Yanılsam sən 🪙 1 coin qazanırsan!',
+    lbNav:'Lider Cədvəl', loading:'Analiz edilir...',
+    bY:'✓ Bəli', bN:'✗ Xeyr', bM:'~ Bilmirəm',
+    rT:'Mənim təxminim:', rS:'20 sual ərzindəki cavablarına əsasən',
+    rY:'✓ Düz tapdın!', rN:'✗ Yanlışdır',
+    fW:'Tapdım!', fL:'Bu dəfə sən qazandın!',
+    fWt:(g,q)=>`"${g}" — ${q} sualda tapdım!`,
+    fLt:(g)=>`"${g}" deyib yanıldım. Coin sənin!`,
+    cMsg:'+1 🪙 Coin qazandın!',
+    pAgain:'YENİDƏN OYNA', menu:'ANA MENYU',
+    lbT:'Lider Cədvəl', lbS:'Ən çətin əşyaları düşünən oyunçular',
+    lbR:'#', lbN:'Oyunçu', lbC:'🪙 Coin',
+    lbE:'Hələ heç kim coin qazanmayıb. İlk ol!', lbBk:'← Geri',
+    cf:(c,r)=>`${c}% əminlik · ${r} sual qaldı`,
+    rm:(r)=>`${r} sual qaldı`,
+    retry:'↻ Yenidən cəhd et', err:'Xəta baş verdi. Yenidən cəhd edin.',
+    pL:'Azerbaijani', yW:'bəli', nW:'xeyr', mW:'bilmirəm',
+  },
+  tr:{
+    logoW:'SORU', qL:'SORU',
+    nkT:'Sen düşün,\nben bulayım!',
+    nkD:'Oyuncu adını gir. Bilemezsem 🪙 coin kazanırsın.',
+    ph:'Oyuncu adın...', startBtn:'OYUNA BAŞLA',
+    h1:'İstediğin bir nesne, canlı veya yer düşün',
+    h2:'Özellik sorularına evet / hayır yanıtla',
+    h3:'20 soru sonunda tahminimi açıklıyorum',
+    h4:'Yanılırsam 🪙 1 coin kazanırsın!',
+    lbNav:'Skor Tablosu', loading:'Analiz ediliyor...',
+    bY:'✓ Evet', bN:'✗ Hayır', bM:'~ Bilmiyorum',
+    rT:'Tahminim:', rS:'20 soru boyunca verdiğin cevaplara göre',
+    rY:'✓ Doğru buldu!', rN:'✗ Yanlış',
+    fW:'Buldum!', fL:'Bu sefer kazandın!',
+    fWt:(g,q)=>`"${g}" — ${q} soruda buldum!`,
+    fLt:(g)=>`"${g}" dedim, yanıldım. Coin senin!`,
+    cMsg:'+1 🪙 Coin kazandın!',
+    pAgain:'TEKRAR OYNA', menu:'ANA MENÜ',
+    lbT:'Skor Tablosu', lbS:'En zor nesneleri düşünen oyuncular',
+    lbR:'#', lbN:'Oyuncu', lbC:'🪙 Coin',
+    lbE:'Henüz kimse coin kazanmadı. İlk ol!', lbBk:'← Geri',
+    cf:(c,r)=>`${c}% emin · ${r} soru kaldı`,
+    rm:(r)=>`${r} soru kaldı`,
+    retry:'↻ Tekrar dene', err:'Hata oluştu. Tekrar deneyin.',
+    pL:'Turkish', yW:'evet', nW:'hayır', mW:'bilmiyorum',
+  },
+  en:{
+    logoW:'QUESTIONS', qL:'Q',
+    nkT:'You think it,\nI\'ll guess it!',
+    nkD:'Enter your nickname. If I can\'t guess — you earn 🪙.',
+    ph:'Your nickname...', startBtn:'START GAME',
+    h1:'Think of any object, creature, or place',
+    h2:'Answer yes / no property questions',
+    h3:'After 20 questions I reveal my guess',
+    h4:'If I\'m wrong — you earn 🪙 1 coin!',
+    lbNav:'Leaderboard', loading:'Analysing...',
+    bY:'✓ Yes', bN:'✗ No', bM:'~ Not sure',
+    rT:'My guess:', rS:'Based on your answers across 20 questions',
+    rY:'✓ Correct!', rN:'✗ Wrong',
+    fW:'Got it!', fL:'You win this round!',
+    fWt:(g,q)=>`"${g}" — found in ${q} questions!`,
+    fLt:(g)=>`My guess "${g}" was wrong. Coin earned!`,
+    cMsg:'+1 🪙 Coin earned!',
+    pAgain:'PLAY AGAIN', menu:'MAIN MENU',
+    lbT:'Leaderboard', lbS:'Players who stumped me the most',
+    lbR:'#', lbN:'Player', lbC:'🪙 Coins',
+    lbE:'Nobody has earned coins yet. Be first!', lbBk:'← Back',
+    cf:(c,r)=>`${c}% confident · ${r} left`,
+    rm:(r)=>`${r} questions left`,
+    retry:'↻ Retry', err:'Error occurred. Please retry.',
+    pL:'English', yW:'yes', nW:'no', mW:'not sure',
+  }
+};
+
+/* ═══════════════════════════════════
+   STATE
+═══════════════════════════════════ */
+let curLang = 'az';
+let isDark  = false;
+let nickname = '';
+let coins    = 0;
+let qCount   = 0;
+let history  = [];
+let dots     = [];
+let lastCands = [];
+
+/* ═══════════════════════════════════
+   HELPERS
+═══════════════════════════════════ */
+const L = () => LANGS[curLang];
+
+function showSc(id) {
+  document.querySelectorAll('.sc').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function setEl(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function setHtml(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = val;
+}
+
+function setAns(disabled) {
+  ['btnY','btnN','btnM'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = disabled;
+  });
+}
+
+/* ═══════════════════════════════════
+   LANG
+═══════════════════════════════════ */
+function applyLang() {
+  const l = L();
+  setEl('eLogoW', l.logoW);
+  setHtml('eNkTitle', l.nkT.replace('\n','<br>'));
+  setEl('eNkDesc', l.nkD);
+  const inp = document.getElementById('eNickInp');
+  if (inp) inp.placeholder = l.ph;
+  setEl('eH1', l.h1); setEl('eH2', l.h2);
+  setEl('eH3', l.h3); setEl('eH4', l.h4);
+  setEl('eLbNav', l.lbNav);
+  setEl('eStartLbl', l.startBtn);
+  setEl('btnY', l.bY); setEl('btnN', l.bN); setEl('btnM', l.bM);
+  setEl('eRTitle', l.rT);
+  setEl('eRBtnY', l.rY); setEl('eRBtnN', l.rN);
+  setEl('eLbTitle', l.lbT); setEl('eLbSub', l.lbS);
+  setEl('eLbBack', l.lbBk);
+  setEl('ePlayAgain', l.pAgain); setEl('eMenuBtn', l.menu);
+  setEl('eLangBtn', curLang.toUpperCase());
+  document.querySelectorAll('.lopt').forEach(el => {
+    el.classList.toggle('sel', el.textContent.toLowerCase() === curLang);
+  });
+}
+
+function setLang(l) {
+  curLang = l;
+  applyLang();
+  document.getElementById('eLangDD').classList.remove('open');
+}
+
+function toggleDD() {
+  document.getElementById('eLangDD').classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.lang-wrap'))
+    document.getElementById('eLangDD').classList.remove('open');
+});
+
+/* ═══════════════════════════════════
+   THEME
+═══════════════════════════════════ */
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+  setEl('eTheme', isDark ? '☀️' : '🌙');
+}
+
+/* ═══════════════════════════════════
+   NICKNAME INPUT
+═══════════════════════════════════ */
+document.getElementById('eNickInp').addEventListener('input', e => {
+  document.getElementById('eStartBtn').disabled = !e.target.value.trim();
+});
+
+document.getElementById('eNickInp').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startGame();
+});
+
+/* ═══════════════════════════════════
+   GAME START
+═══════════════════════════════════ */
+function startGame() {
+  const inp = document.getElementById('eNickInp');
+  const n = inp ? inp.value.trim() : nickname;
+  if (!n) return;
+  nickname = n;
+  qCount    = 0;
+  history   = [];
+  lastCands = [];
+  buildDots();
+  setHtml('eHist', '');
+  setEl('eCoinDisp', String(coins));
+  showSc('scGame');
+  askQuestion();
+}
+
+function playAgain() {
+  // Reuse existing nickname
+  qCount    = 0;
+  history   = [];
+  lastCands = [];
+  buildDots();
+  setHtml('eHist', '');
+  setEl('eCoinDisp', String(coins));
+  showSc('scGame');
+  askQuestion();
+}
+
+function goMenu() {
+  showSc('scNick');
+}
+
+/* ═══════════════════════════════════
+   DOTS
+═══════════════════════════════════ */
+function buildDots() {
+  const row = document.getElementById('eDotsRow');
+  if (!row) return;
+  row.innerHTML = '';
+  dots = [];
+  for (let i = 0; i < 20; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    row.appendChild(d);
+    dots.push(d);
+  }
+}
+
+/* ═══════════════════════════════════
+   ASK QUESTION  — core logic
+═══════════════════════════════════ */
+async function askQuestion() {
+  qCount++;
+  const l = L();
+
+  const badge = document.getElementById('eQBadge');
+  if (badge) badge.innerHTML = `${l.qL} <strong>${qCount}</strong> / 20`;
+
+  const box = document.getElementById('eQBox');
+  if (!box) return;
+  box.innerHTML = `<div class="ldc"><div class="sp"></div><span>${l.loading}</span></div>`;
+  setAns(true);
+
+  const histTxt = history.length
+    ? history.map((h, i) => `${i+1}. "${h.q}" → ${h.a}`).join('\n')
+    : '—';
+
+  const rem = 20 - qCount;
+
+  const prompt =
+`You are playing "20 Questions". The user thought of something. Ask ONLY property yes/no questions.
+NEVER include a specific object name in the question field.
+
+Language for output: ${l.pL}
+Questions and answers so far:
+${histTxt}
+
+Respond with ONLY this JSON (no markdown, no explanation):
+{"candidates":["obj1","obj2","..."],"reasoning":"one sentence in ${l.pL}","confidence":0,"question":"yes/no property question in ${l.pL}?"}
+
+Rules for "question":
+- Properties only: alive?, man-made?, larger than a car?, edible?, uses electricity?, found outdoors?, can hold in hand?
+- NEVER name a specific thing ("Is it a cat?" is FORBIDDEN)
+- Split remaining candidates roughly in half each time
+- Do not repeat already-asked topics
+- Short and clear in ${l.pL}`;
+
+  try {
+    const res = await gemini(prompt, 400);
+    let raw = res.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+    const p = JSON.parse(raw);
+
+    if (!p.question) throw new Error('Missing question in response');
+    lastCands = Array.isArray(p.candidates) ? p.candidates : [];
+
+    const conf = Number(p.confidence) || 0;
+    const confHtml = conf >= 65
+      ? `<div class="cfr"><div class="cfb"><div class="cff" style="width:${conf}%"></div></div><div class="cfl">${l.cf(conf, rem)}</div></div>`
+      : `<div class="cfl" style="margin-top:8px;font-size:11px;color:var(--ink3)">${l.rm(rem)}</div>`;
+
+    box.innerHTML = `
+      <div class="ql">${l.qL} ${qCount}</div>
+      <div class="qt">${escHtml(p.question)}</div>
+      ${p.reasoning ? `<div class="rc">💡 ${escHtml(p.reasoning)}</div>` : ''}
+      ${confHtml}`;
+    setAns(false);
+
+  } catch (err) {
+    console.error('askQuestion error:', err);
+    box.innerHTML = `
+      <div class="qt" style="color:var(--accent);font-size:15px">${l.err}</div>
+      <button class="btn-s" style="display:inline-block;margin-top:12px" onclick="retryQ()">${l.retry}</button>`;
+  }
+}
+
+function retryQ() {
+  qCount--;
+  askQuestion();
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══════════════════════════════════
+   ANSWER
+═══════════════════════════════════ */
+function doAns(a) {
+  setAns(true);
+  const l = L();
+  const qEl = document.getElementById('eQBox');
+  const q = qEl ? (qEl.querySelector('.qt')?.textContent || '') : '';
+  const disp = a === 'yes' ? l.yW : a === 'no' ? l.nW : l.mW;
+  history.push({ q, a: disp });
+
+  const di = qCount - 1;
+  if (di >= 0 && di < dots.length) {
+    dots[di].classList.add(a === 'yes' ? 'y' : a === 'no' ? 'n' : 'm');
+  }
+
+  addHistItem(q, a);
+
+  if (qCount >= 20) {
+    makeFinalGuess();
+  } else {
+    askQuestion();
+  }
+}
+
+function addHistItem(q, a) {
+  const list = document.getElementById('eHist');
+  if (!list) return;
+  const row = document.createElement('div');
+  row.className = 'hr2';
+  const cls  = a === 'yes' ? 'hty' : a === 'no' ? 'htn' : 'htm';
+  const icon = a === 'yes' ? '✓'   : a === 'no' ? '✗'   : '~';
+  row.innerHTML = `<div class="ht ${cls}">${icon}</div><span>${escHtml(q)}</span>`;
+  list.prepend(row);
+}
+
+/* ═══════════════════════════════════
+   FINAL GUESS
+═══════════════════════════════════ */
+async function makeFinalGuess() {
+  showSc('scResult');
+  const l = L();
+  setEl('eRIcon',  '🧠');
+  setEl('eRTitle', l.rT);
+  setEl('eRGuess', '...');
+  setEl('eRSub',   l.loading);
+
+  const histTxt = history.map((h, i) => `${i+1}. "${h.q}" → ${h.a}`).join('\n');
+
+  const prompt =
+`You played 20 Questions. All 20 questions are answered. Based on the Q&A, guess what the user was thinking of.
+Respond in ${l.pL}.
+
+${histTxt}
+
+Respond with ONLY this JSON (no markdown):
+{"guess":"name of object in ${l.pL}","reasoning":"one short sentence why in ${l.pL}"}`;
+
+  try {
+    const raw2 = await gemini(prompt, 150);
+    const p = JSON.parse(raw2.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim());
+    setEl('eRGuess', p.guess || lastCands[0] || '?');
+    setEl('eRSub',   p.reasoning || l.rS);
+  } catch (e) {
+    console.error('finalGuess error:', e);
+    setEl('eRGuess', lastCands[0] || '?');
+    setEl('eRSub', l.rS);
+  }
+}
+
+/* ═══════════════════════════════════
+   CONFIRM RESULT
+═══════════════════════════════════ */
+async function doConfirm(correct) {
+  const guess   = document.getElementById('eRGuess')?.textContent || '';
+  const l = L();
+  const histTxt = history.map((h, i) => `${i+1}. "${h.q}" → ${h.a}`).join('\n');
+
+  if (correct) {
+    setEl('eFIcon',  '🎯');
+    setEl('eFTitle', l.fW);
+    setHtml('eCoinBox', '');
+    setEl('eFSub', l.fWt(guess, qCount));
+  } else {
+    coins++;
+    setEl('eFIcon',  '🏅');
+    setEl('eFTitle', l.fL);
+    setHtml('eCoinBox', `<div class="ca">${escHtml(l.cMsg)}</div>`);
+    setEl('eFSub', l.fLt(guess));
+    setEl('eCoinDisp', String(coins));
+    saveScore().catch(e => console.warn('saveScore:', e));
+    saveMissed(histTxt, guess).catch(e => console.warn('saveMissed:', e));
+  }
+  showSc('scFinal');
+}
+
+/* ═══════════════════════════════════
+   STORAGE  (graceful — works even
+   if window.storage is unavailable)
+═══════════════════════════════════ */
+function hasStorage() {
+  return typeof window.storage !== 'undefined' && window.storage !== null;
+}
+
+async function saveScore() {
+  if (!hasStorage()) return;
+  const key = 'lb:' + nickname.toLowerCase().replace(/\s+/g, '_');
+  let existing = null;
+  try {
+    const r = await window.storage.get(key, true);
+    if (r && r.value) existing = JSON.parse(r.value);
+  } catch (_) {}
+  const rec = {
+    nickname,
+    coins: existing ? Math.max(existing.coins, coins) : coins,
+    ts: Date.now()
+  };
+  await window.storage.set(key, JSON.stringify(rec), true);
+}
+
+async function saveMissed(histTxt, aiGuess) {
+  if (!hasStorage()) return;
+  const key = 'missed:' + Date.now();
+  await window.storage.set(key, JSON.stringify({
+    lang: curLang, history: histTxt, aiGuess, ts: Date.now()
+  }), true);
+}
+
+async function loadLB() {
+  if (!hasStorage()) return [];
+  try {
+    const r = await window.storage.list('lb:', true);
+    const keys = (r && r.keys) ? r.keys : [];
+    const entries = [];
+    for (const k of keys) {
+      try {
+        const rv = await window.storage.get(k, true);
+        if (rv && rv.value) entries.push(JSON.parse(rv.value));
+      } catch (_) {}
+    }
+    return entries.sort((a, b) => b.coins - a.coins);
+  } catch (_) {
+    return [];
+  }
+}
+
+/* ═══════════════════════════════════
+   LEADERBOARD
+═══════════════════════════════════ */
+async function openLB() {
+  showSc('scLB');
+  const l = L();
+  setEl('eLbTitle', l.lbT);
+  setEl('eLbSub',   l.lbS);
+  setEl('eLbBack',  l.lbBk);
+  setHtml('eLbContent', `<div class="lbem" style="opacity:.5">${l.loading}</div>`);
+
+  const entries = await loadLB();
+
+  if (!entries.length) {
+    setHtml('eLbContent', `<div class="lbem">${l.lbE}</div>`);
+    return;
+  }
+
+  const medals  = ['🥇','🥈','🥉'];
+  const myKey   = nickname.toLowerCase().replace(/\s+/g, '_');
+  let html = `<table class="lbt"><thead><tr>
+    <th>${l.lbR}</th><th>${l.lbN}</th>
+    <th style="text-align:right">${l.lbC}</th>
+  </tr></thead><tbody>`;
+
+  entries.slice(0, 25).forEach((e, i) => {
+    const rCls  = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
+    const rDisp = i < 3 ? medals[i] : String(i + 1);
+    const isMe  = e.nickname.toLowerCase().replace(/\s+/g,'_') === myKey;
+    html += `<tr${isMe ? ' class="lbme"' : ''}>
+      <td><span class="lbr ${rCls}">${rDisp}</span></td>
+      <td><span class="lbn">${escHtml(e.nickname)}${isMe ? ' ←' : ''}</span></td>
+      <td class="lbc">${e.coins} 🪙</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  setHtml('eLbContent', html);
+}
+
+/* ═══════════════════════════════════
+   GEMINI API HELPER
+═══════════════════════════════════ */
+async function gemini(prompt, maxTokens) {
+  const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBS-p4hrswAyZTVI9QBSS2A7xe1krhR2J0', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { maxOutputTokens: maxTokens, temperature: 0.7 }
+    })
+  });
+  if (!res.ok) throw new Error('Gemini HTTP ' + res.status);
+  const d = await res.json();
+  if (!d.candidates || !d.candidates[0]) throw new Error('No candidates: ' + JSON.stringify(d).slice(0,200));
+  return d.candidates[0].content.parts[0].text;
+}
+
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+applyLang();
+</script>
+</body>
+</html>
